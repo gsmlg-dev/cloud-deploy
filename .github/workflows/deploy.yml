@@ -68,14 +68,14 @@ jobs:
           echo "::group::Deploying to $TARGET"
 
           if [ "${{ github.event.inputs.build_on_target }}" == "true" ]; then
-            nixos-rebuild switch \
+            nix shell nixpkgs#nixos-rebuild -c nixos-rebuild switch \
               --flake .#${{ matrix.host }} \
               --target-host "$TARGET" \
               --build-host "$TARGET" \
               --use-remote-sudo \
               --verbose
           else
-            nixos-rebuild switch \
+            nix shell nixpkgs#nixos-rebuild -c nixos-rebuild switch \
               --flake .#${{ matrix.host }} \
               --target-host "$TARGET" \
               --use-remote-sudo \
