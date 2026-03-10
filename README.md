@@ -11,15 +11,16 @@ GitHub Actions (ubuntu-latest)
         │
         └── Deploy via SSH + nixos-rebuild
                 │
-    ┌───────────┼───────────┐
-    ▼           ▼           ▼
-vultr-02    vultr-03    vultr-04
+    ┌───────┬───┼───────┐
+    ▼       ▼   ▼       ▼
+vultr-01 vultr-02 vultr-03 vultr-04
 ```
 
 ## Target Hosts
 
 | Host | Purpose |
 |------|---------|
+| vultr-01 | General purpose |
 | vultr-02 | Proxy infrastructure (Squid) |
 | vultr-03 | Web services (Caddy + Rails + YellowDog DNS) |
 | vultr-04 | Web services (Caddy + DNS) |
@@ -34,7 +35,7 @@ ssh-keygen -t ed25519 -C "cloud-deploy@github-actions" -f ~/.ssh/cloud-deploy -N
 
 ### 2. Add Public Key to Target Hosts
 
-On each target host (vultr-02, vultr-03, vultr-04):
+On each target host (vultr-01, vultr-02, vultr-03, vultr-04):
 
 ```bash
 # Add to authorized_keys
@@ -60,7 +61,7 @@ Add the public key to https://github.com/Gao-OS/nix-config/settings/keys as a de
 ### 4. Get SSH Known Hosts
 
 ```bash
-ssh-keyscan vultr-02.gsmlg.net vultr-03.gsmlg.net vultr-04.gsmlg.net
+ssh-keyscan vultr-01.gsmlg.net vultr-02.gsmlg.net vultr-03.gsmlg.net vultr-04.gsmlg.net
 ```
 
 ### 5. Configure GitHub Secrets
@@ -101,7 +102,7 @@ Ensure each target host has these NixOS settings:
 2. Select **Deploy NixOS** workflow
 3. Click **Run workflow**
 4. Choose target:
-   - `vultr-02`, `vultr-03`, `vultr-04` - Deploy to single host
+   - `vultr-01`, `vultr-02`, `vultr-03`, `vultr-04` - Deploy to single host
    - `all` - Deploy to all hosts in parallel
 5. Optionally enable "Build on target host"
 6. Click **Run workflow**

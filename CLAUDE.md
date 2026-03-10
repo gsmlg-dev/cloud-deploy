@@ -8,7 +8,7 @@ NixOS cloud deployment orchestration via GitHub Actions. Deploys NixOS configura
 
 ## Architecture
 
-GitHub Actions runner (ubuntu-latest) clones `Gao-OS/nix-config`, then deploys via SSH + `nixos-rebuild` to three Vultr hosts (`vultr-02`, `vultr-03`, `vultr-04`) under the `gsmlg.net` domain. Deployments use flake outputs (e.g., `.#vultr-02`). Matrix strategy enables parallel multi-host deployment.
+GitHub Actions runner (ubuntu-latest) clones `Gao-OS/nix-config`, then deploys via SSH + `nixos-rebuild` to four Vultr hosts (`vultr-01`, `vultr-02`, `vultr-03`, `vultr-04`) under the `gsmlg.net` domain. Deployments use flake outputs (e.g., `.#vultr-02`). Matrix strategy enables parallel multi-host deployment.
 
 Two build modes:
 - **Local build** (default): builds on the GitHub Actions runner, pushes closure to target
@@ -40,6 +40,6 @@ gh run watch
 
 - **SSH user**: `gao`
 - **Domain**: `gsmlg.net`
-- **Hosts**: `vultr-02` (Squid proxy), `vultr-03` (Caddy + Rails + DNS), `vultr-04` (Caddy + DNS)
+- **Hosts**: `vultr-01` (general purpose), `vultr-02` (Squid proxy), `vultr-03` (Caddy + Rails + DNS), `vultr-04` (Caddy + DNS)
 - **Required secrets**: `SSH_PRIVATE_KEY`, `SSH_KNOWN_HOSTS`, `NIX_CONFIG_DEPLOY_KEY`
 - **Nix config source**: `git@github.com:Gao-OS/nix-config.git`

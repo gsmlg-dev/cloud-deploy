@@ -9,6 +9,7 @@ on:
         default: 'all'
         type: choice
         options:
+          - vultr-01
           - vultr-02
           - vultr-03
           - vultr-04
@@ -31,7 +32,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        host: ${{ fromJSON(github.event.inputs.target == 'all' && '["vultr-02", "vultr-03", "vultr-04"]' || format('["{0}"]', github.event.inputs.target)) }}
+        host: ${{ fromJSON(github.event.inputs.target == 'all' && '["vultr-01", "vultr-02", "vultr-03", "vultr-04"]' || format('["{0}"]', github.event.inputs.target)) }}
 
     steps:
       - name: Install Nix
