@@ -24,6 +24,7 @@ env:
   NIX_CONFIG_REPO: git@github.com:Gao-OS/nix-config.git
   SSH_USER: gao
   DOMAIN: gsmlg.net
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   deploy:
@@ -36,14 +37,14 @@ jobs:
 
     steps:
       - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@main
+        uses: DeterminateSystems/nix-installer-action@v21
         with:
           extra-conf: |
             experimental-features = nix-command flakes
             accept-flake-config = true
 
       - name: Setup SSH agent
-        uses: webfactory/ssh-agent@v0.9.0
+        uses: webfactory/ssh-agent@v0.10.0
         with:
           ssh-private-key: |
             ${{ secrets.SSH_PRIVATE_KEY }}
