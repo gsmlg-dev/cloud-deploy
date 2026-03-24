@@ -23,7 +23,7 @@ on:
 env:
   NIX_CONFIG_REPO: git@github.com:Gao-OS/nix-config.git
   SSH_USER: gao
-  DOMAIN: gsmlg.net
+  DOMAIN: ${{ secrets.MY_DOMAIN }}
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:

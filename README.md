@@ -61,7 +61,7 @@ Add the public key to https://github.com/Gao-OS/nix-config/settings/keys as a de
 ### 4. Get SSH Known Hosts
 
 ```bash
-ssh-keyscan vultr-01.gsmlg.net vultr-02.gsmlg.net vultr-03.gsmlg.net vultr-04.gsmlg.net
+ssh-keyscan vultr-01.example.com vultr-02.example.com vultr-03.example.com vultr-04.example.com
 ```
 
 ### 5. Configure GitHub Secrets
@@ -151,7 +151,7 @@ Ensure `nix.settings.trusted-users` includes the deployment user on target hosts
 Verify SSH access works:
 
 ```bash
-ssh gao@vultr-02.gsmlg.net 'echo OK'
+ssh gao@vultr-02.example.com 'echo OK'
 ```
 
 ### Deployment Timeout
