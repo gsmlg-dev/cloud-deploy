@@ -14,11 +14,6 @@ on:
           - vultr-03
           - vultr-04
           - all
-      build_on_target:
-        description: 'Build on target host instead of runner'
-        required: false
-        default: false
-        type: boolean
 
 env:
   NIX_CONFIG_REPO: git@github.com:Gao-OS/nix-config.git
@@ -69,20 +64,11 @@ jobs:
           TARGET="${{ env.SSH_USER }}@${{ matrix.host }}.${{ env.DOMAIN }}"
           echo "::group::Deploying to $TARGET"
 
-          if [ "${{ github.event.inputs.build_on_target }}" == "true" ]; then
-            nix shell nixpkgs#nixos-rebuild -c nixos-rebuild switch \
-              --flake .#${{ matrix.host }} \
-              --target-host "$TARGET" \
-              --build-host "$TARGET" \
-              --use-remote-sudo \
-              --verbose
-          else
-            nix shell nixpkgs#nixos-rebuild -c nixos-rebuild switch \
-              --flake .#${{ matrix.host }} \
-              --target-host "$TARGET" \
-              --use-remote-sudo \
-              --verbose
-          fi
+          nix shell nixpkgs#nixos-rebuild -c nixos-rebuild switch \
+            --flake .#${{ matrix.host }} \
+            --target-host "$TARGET" \
+            --use-remote-sudo \
+            --verbose
 
           echo "::endgroup::"
 

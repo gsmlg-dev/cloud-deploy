@@ -10,9 +10,7 @@ NixOS cloud deployment orchestration via GitHub Actions. Deploys NixOS configura
 
 GitHub Actions runner (ubuntu-latest) clones `Gao-OS/nix-config`, then deploys via SSH + `nixos-rebuild` to four Vultr hosts (`vultr-01`, `vultr-02`, `vultr-03`, `vultr-04`) under the `example.com` domain. Deployments use flake outputs (e.g., `.#vultr-02`). Matrix strategy enables parallel multi-host deployment.
 
-Two build modes:
-- **Local build** (default): builds on the GitHub Actions runner, pushes closure to target
-- **Remote build** (`build_on_target: true`): builds directly on the target host
+Builds on the GitHub Actions runner, then pushes the closure to the target host via SSH.
 
 ## Repository Structure
 
@@ -28,9 +26,6 @@ gh workflow run deploy.yml -f target=vultr-02
 
 # Deploy to all hosts
 gh workflow run deploy.yml -f target=all
-
-# Deploy with remote build
-gh workflow run deploy.yml -f target=vultr-03 -f build_on_target=true
 
 # Watch deployment progress
 gh run watch

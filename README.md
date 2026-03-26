@@ -104,8 +104,7 @@ Ensure each target host has these NixOS settings:
 4. Choose target:
    - `vultr-01`, `vultr-02`, `vultr-03`, `vultr-04` - Deploy to single host
    - `all` - Deploy to all hosts in parallel
-5. Optionally enable "Build on target host"
-6. Click **Run workflow**
+5. Click **Run workflow**
 
 ### Via GitHub CLI
 
@@ -116,29 +115,9 @@ gh workflow run deploy.yml -f target=vultr-02
 # Deploy to all hosts
 gh workflow run deploy.yml -f target=all
 
-# Deploy with remote build (uses target's resources)
-gh workflow run deploy.yml -f target=vultr-03 -f build_on_target=true
-
 # Watch progress
 gh run watch
 ```
-
-## Build Strategies
-
-### Local Build (Default)
-
-Build on GitHub Actions runner, push closure to target.
-
-- Doesn't consume target resources during build
-- Larger data transfer
-
-### Remote Build
-
-Build directly on target host.
-
-- Minimal data transfer
-- Uses target's existing Nix store cache
-- Enable with `build_on_target: true`
 
 ## Troubleshooting
 
